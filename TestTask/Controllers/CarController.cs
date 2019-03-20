@@ -7,66 +7,70 @@ using TestTask.Models;
 
 namespace TestTask.Controllers
 {
-    [Route("api/users")]
+    [Route("api/cars")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class CarController : ControllerBase
     {
         public ApplicationContext _db;
 
-        public UserController(ApplicationContext context)
+        public CarController(ApplicationContext context)
         {
             _db = context;
         }
 
 
+
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<Car> Get()
         {
-            return _db.Users.ToList();
+            return _db.Cars.ToList();
         }
 
         [HttpGet("{id}")]
-        public Task<User> Get(int id)
+        public Task<Car> Get(int id)
         {
-            Task<User> user = _db.Users.FirstOrDefaultAsync(x => x.Id == id);
-            return user;
+            Task<Car> car = _db.Cars.FirstOrDefaultAsync(x => x.Id == id);
+            return car;
         }
+
 
         [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        public IActionResult Post([FromBody] Car car)
         {
             if (ModelState.IsValid)
             {
-                _db.Users.Add(user);
+                _db.Cars.Add(car);
                 _db.SaveChanges();
-                return Ok(user);
+                return Ok(car);
             }
             return BadRequest(ModelState);
         }
+
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] User user)
+        public IActionResult Put(int id, [FromBody] Car car)
         {
             if (ModelState.IsValid)
             {
-                _db.Update(user);
+                _db.Update(car);
                 _db.SaveChanges();
-                return Ok(user);
+                return Ok(car);
             }
 
             return BadRequest(ModelState);
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            User user = _db.Users.FirstOrDefault(x => x.Id == id);
-            if (user != null)
+            Car car = _db.Cars.FirstOrDefault(x => x.Id == id);
+            if (car != null)
             {
-                _db.Users.Remove(user);
+                _db.Cars.Remove(car);
                 _db.SaveChanges();
             }
-            return Ok(user);
+            return Ok(car);
         }
     }
 }

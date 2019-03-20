@@ -7,51 +7,55 @@ using TestTask.Models;
 
 namespace TestTask.Controllers
 {
-    [Route("api/users")]
+    [Route("api/orders")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class OrderController : ControllerBase
     {
         public ApplicationContext _db;
 
-        public UserController(ApplicationContext context)
+        public OrderController(ApplicationContext context)
         {
             _db = context;
         }
 
 
+
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<Order> Get()
         {
-            return _db.Users.ToList();
+            return _db.Orders.ToList();
         }
+
 
         [HttpGet("{id}")]
-        public Task<User> Get(int id)
+        public Task<Order> Get(int id)
         {
-            Task<User> user = _db.Users.FirstOrDefaultAsync(x => x.Id == id);
-            return user;
+            Task<Order> order = _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            return order;
         }
 
+
         [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        public IActionResult Post([FromBody] Order order)
         {
             if (ModelState.IsValid)
             {
-                _db.Users.Add(user);
+                _db.Orders.Add(order);
                 _db.SaveChanges();
-                return Ok(user);
+                return Ok(order);
             }
             return BadRequest(ModelState);
         }
 
+
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] User user)
+        public IActionResult Put(int id, [FromBody] Order order)
         {
             if (ModelState.IsValid)
             {
-                _db.Update(user);
+                _db.Update(order);
                 _db.SaveChanges();
-                return Ok(user);
+                return Ok(order);
             }
 
             return BadRequest(ModelState);
@@ -60,13 +64,13 @@ namespace TestTask.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            User user = _db.Users.FirstOrDefault(x => x.Id == id);
-            if (user != null)
+            Order order = _db.Orders.FirstOrDefault(x => x.Id == id);
+            if (order != null)
             {
-                _db.Users.Remove(user);
+                _db.Orders.Remove(order);
                 _db.SaveChanges();
             }
-            return Ok(user);
+            return Ok(order);
         }
     }
 }
