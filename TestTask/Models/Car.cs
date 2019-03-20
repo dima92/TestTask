@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TestTask.Models
 {
@@ -10,5 +11,6 @@ namespace TestTask.Models
         public string ClassCar { get; set; }
         public DateTime DateManufacture { get; set; }
         public int NumberRegistration { get; set; }
+        public List<Order> Order { get; set; }
     }
 }

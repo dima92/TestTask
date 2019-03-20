@@ -7,7 +7,7 @@ using TestTask.Models;
 
 namespace TestTask.Controllers
 {
-    [Route("api/cars")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CarController : ControllerBase
     {
