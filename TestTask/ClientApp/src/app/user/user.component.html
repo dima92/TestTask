@@ -1,0 +1,34 @@
+﻿<h1>Клиенты</h1>
+
+<div style="width: 100%;display: flex">
+    <kendo-grid [kendoGridGroupBinding]="gridData" #grid
+                [height]="410"
+                [loading]="loading"
+                [skip]="state.skip"
+                [sort]="state.sort"
+                [filter]="grid.filter"
+                [sortable]="true"
+                [filterable]="true">
+        <kendo-grid-column field="ProfitType" title="Имя" width="120">
+            {{Name}}
+        </kendo-grid-column>
+        <!--<kendo-grid-column field="CategoryDescription" title="Категория" width="250">
+            <ng-template kendoGridCellTemplate let-dataItem style="align-items: center;">
+                {{dataItem.CategoryDescription}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="CategoryDateCreate" title="Дата" width="120">
+            {{CategoryDateCreate}}
+        </kendo-grid-column>
+        <kendo-grid-column field="Summa" title="Сумма" width="120">
+            {{Summa}}
+        </kendo-grid-column>
+        <kendo-grid-column field="ApplicationUser" title="Добавил" width="250">
+            {{ApplicationUser}}
+        </kendo-grid-column>
+        <kendo-grid-column field="Description" title="Описание">
+            {{Description}}
+        </kendo-grid-column>-->
+
+    </kendo-grid>
+</div>

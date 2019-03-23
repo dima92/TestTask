@@ -21,7 +21,7 @@
 }
 @media (min-width: 768px) {
   .main-nav {
-    width: calc(25% - 30px);
+    width: calc(19% - 30px);
     min-width: 180px;
   }
   .main-nav .navbar {
