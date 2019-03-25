@@ -6,7 +6,7 @@ import { Car } from '../models/car';
 @Injectable()
 export class CarService {
 
-    private url = "/api/cars";
+    private url = "/api/car";
 
     constructor(private http: HttpClient) {
     }

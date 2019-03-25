@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TestTask.Models;
 
 namespace TestTask.Controllers
@@ -21,9 +21,21 @@ namespace TestTask.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Car> Get()
+        public IActionResult Get()
         {
-            return _db.Cars.ToList();
+            try
+            {
+                var result = _db.Cars.ToList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", ex.Message);
+                return BadRequest(ModelState);
+            }
+
+
+
         }
 
         [HttpGet("{id}")]
@@ -41,7 +53,7 @@ namespace TestTask.Controllers
             {
                 _db.Cars.Add(car);
                 _db.SaveChanges();
-                return Ok(car);
+                return Ok(true);
             }
             return BadRequest(ModelState);
         }

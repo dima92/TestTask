@@ -1,6 +1,5 @@
 ﻿<div style="padding-left: 18%">
-    <h1>Автомобили</h1>
-    <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
+    <h3>Автомобили</h3>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -12,11 +11,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let car of cars">
             <td>{{car?.mark}}</td>
             <td>{{car?.model}}</td>
-            <td>{{car?.classCar}</td>
-            <td>{{car?.dateManufacture| date}}}</td>
+            <td>{{car?.classCar}}</td>
+            <td>{{car?.dateManufacture| date:'dd.MM.yyyy'}}</td>
             <td>{{car?.numberRegistration}}</td>
             <td>
                 <button class="btn btn-sm btn-primary" (click)="edit(car)">Изменить</button>

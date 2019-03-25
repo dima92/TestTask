@@ -30,9 +30,9 @@ export class UserComponent implements OnInit {
             });
 
 
-        this.userService.createUser(this.user).subscribe((data: User) => {
-            this.users.push(data);
-        });
+        //this.userService.createUser(this.user).subscribe((data: User) => {
+        //    this.users.push(data);
+        //});
 
 
 

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TestTask.Models;
 
 namespace TestTask.Controllers
@@ -21,9 +21,18 @@ namespace TestTask.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Order> Get()
+        public IActionResult Get()
         {
-            return _db.Orders.ToList();
+            try
+            {
+                var result = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("error", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TestTask.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ad : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
