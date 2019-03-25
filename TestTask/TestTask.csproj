@@ -23,6 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
@@ -35,11 +36,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\car.ts" />
+    <None Remove="ClientApp\src\app\models\order.ts" />
+    <None Remove="ClientApp\src\app\services\order.service.ts" />
     <None Remove="ClientApp\src\app\services\user.service.ts" />
     <None Remove="ClientApp\src\app\user.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\car.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\order.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\order.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\user.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
   </ItemGroup>

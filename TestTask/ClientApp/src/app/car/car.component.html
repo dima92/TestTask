@@ -1,0 +1,28 @@
+﻿<div style="padding-left: 18%">
+    <h1>Автомобили</h1>
+    <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Марка</td>
+            <td>Модель</td>
+            <td>Класс машины</td>
+            <td>Дата производства</td>
+            <td>Регистрационный номер</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{car?.mark}}</td>
+            <td>{{car?.model}}</td>
+            <td>{{car?.classCar}</td>
+            <td>{{car?.dateManufacture| date}}}</td>
+            <td>{{car?.numberRegistration}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="edit(car)">Изменить</button>
+                <button class="btn btn-sm btn-danger" (click)="delete(car)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
