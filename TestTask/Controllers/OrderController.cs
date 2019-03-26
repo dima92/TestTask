@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestTask.Models;
+using TestTask.ModelsDto;
 
 namespace TestTask.Controllers
 {
@@ -25,7 +27,23 @@ namespace TestTask.Controllers
         {
             try
             {
-                var result = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                List<OrderDto> result = new List<OrderDto>();
+                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                foreach (var order in allOrders)
+                {
+                    result.Add(new OrderDto
+                    {
+                        Car = $"{order.Car.Mark} {order.Car.Model}",
+                        CarId = order.CarId,
+                        User = $"{order.User.Name} {order.User.LastName}",
+                        UserId = order.UserId,
+                        StartDate = order.StartDate,
+                        EndDate = order.EndDate,
+                        Rent = order.Rent,
+                        Description = order.Description
+                    });
+                }
+
                 return Ok(result);
             }
             catch (Exception ex)

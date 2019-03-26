@@ -11,6 +11,7 @@ export class OrderComponent implements OnInit {
 
     order: Order = new Order();
     orders: Order[];
+    status: boolean = true;
 
     constructor(private orderService: OrderService) {
     }
@@ -28,17 +29,19 @@ export class OrderComponent implements OnInit {
                 }
             });
 
-
         //this.orderService.createOrder(this.order).subscribe((data: Order) => {
         //    this.orders.push(data);
         //});
 
+        //this.orderService.updateOrder(this.order).subscribe(data => this.order);
 
+        //this.orderService.deleteOrder(this.order.id).subscribe(data => this.order);
 
-        this.orderService.updateOrder(this.order).subscribe(data => this.order);
+    }
 
-        this.orderService.deleteOrder(this.order.id).subscribe(data => this.order);
+    add() {
 
+        this.status = false;
     }
 }
 

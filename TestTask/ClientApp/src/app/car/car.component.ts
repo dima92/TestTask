@@ -15,8 +15,6 @@ export class CarComponent implements OnInit {
     constructor(private carService: CarService) {
     }
 
-
-
     ngOnInit() {
         this.carService.getCars().subscribe((data: Car[]) => {
             this.cars = data;
@@ -27,21 +25,6 @@ export class CarComponent implements OnInit {
                     alert(error.error.error[i]);
                 }
             });
-
-
-        //this.carService.createCar(this.car).subscribe((value) => {
-        //    if (value) {
-        //        this.ngOnInit();
-        //    }
-
-        //});
-
-
-
-        this.carService.updateCar(this.car).subscribe(data => this.car);
-
-        this.carService.deleteCar(this.car.id).subscribe(data => this.car);
-
     }
 }
 

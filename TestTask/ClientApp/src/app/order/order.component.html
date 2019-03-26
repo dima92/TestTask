@@ -1,24 +1,37 @@
-﻿<h3>Заказы</h3>
-<div style="padding-left: 18%">
-    <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
-    <table class="table table-striped">
-        <thead>
+﻿<div *ngIf="status;else unset">
+    <h3>Заказы</h3>
+    <div>
+        <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
+        <table class="table table-striped">
+            <thead>
             <tr>
+                <td>Автомобиль</td>
+                <td>Статус</td>
+                <td>Дата начала</td>
+                <td>Дата окончания</td>
+                <td>Пользователь</td>
                 <td>Описание</td>
-                <td>Дата начала периода</td>
-                <td>Дата окончания периода</td>
             </tr>
-        </thead>
-        <!--<tbody>
+            </thead>
+            <tbody>
             <tr *ngFor="let order of orders">
-                <td>{{order.description?}}</td>
-                <td>{{order.startDate | date:'dd.MM.yyyy' }}</td>
+                <td>{{order.car}}</td>
+                <td>{{order.rent ? 'занято' : 'свободно'}}</td>
+                <td>{{order.startDate| date:'dd.MM.yyyy'}}</td>
                 <td>{{order.endDate| date:'dd.MM.yyyy'}}</td>
+                <td>{{order.user}}</td>
+                <td>{{order.description}}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" (click)="edit(order)">Изменить</button>
                     <button class="btn btn-sm btn-danger" (click)="delete(order)">Удалить</button>
                 </td>
             </tr>
-        </tbody>-->
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
+<ng-template #unset>  
+    <div>
+        <h3>Добавление заказа</h3>
+    </div> 
+</ng-template> 
