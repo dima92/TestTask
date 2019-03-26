@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TestTask.Migrations
 {
-    public partial class ad : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace TestTask.Migrations
                     Model = table.Column<string>(nullable: true),
                     ClassCar = table.Column<string>(nullable: true),
                     DateManufacture = table.Column<DateTime>(nullable: false),
-                    NumberRegistration = table.Column<int>(nullable: false)
+                    NumberRegistration = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

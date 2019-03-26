@@ -10,14 +10,14 @@ using TestTask.Models;
 namespace TestTask.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190325190217_Initial")]
+    [Migration("20190326053604_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,7 +35,7 @@ namespace TestTask.Migrations
 
                     b.Property<string>("Model");
 
-                    b.Property<int>("NumberRegistration");
+                    b.Property<string>("NumberRegistration");
 
                     b.HasKey("Id");
 

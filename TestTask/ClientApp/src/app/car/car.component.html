@@ -16,11 +16,7 @@
             <td>{{car?.model}}</td>
             <td>{{car?.classCar}}</td>
             <td>{{car?.dateManufacture| date:'dd.MM.yyyy'}}</td>
-            <td>{{car?.numberRegistration}}</td>
-            <td>
-                <button class="btn btn-sm btn-primary" (click)="edit(car)">Изменить</button>
-                <button class="btn btn-sm btn-danger" (click)="delete(car)">Удалить</button>
-            </td>
+            <td>{{car?.numberRegistration}}</td>          
         </tr>
         </tbody>
     </table>

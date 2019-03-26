@@ -5,6 +5,6 @@
         public model?: string,
         public classCar?: string,
         public dateManufacture?: Date,
-        public numberRegistration?: number
+        public numberRegistration?: string
     ) { }
 }

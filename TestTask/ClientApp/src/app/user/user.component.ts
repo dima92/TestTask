@@ -23,10 +23,9 @@ export class UserComponent implements OnInit {
         },
 
             error => {
-                alert(error.error.Message);
-                //for (var i = 0; i < error.error.ModelState.errorLogin.length; i++) {
-                //    alert(error.error.ModelState.errorLogin[i]);
-                //}
+                for (var i = 0; i < error.error.error.length; i++) {
+                    alert(error.error.error[i]);
+                }
             });
 
 

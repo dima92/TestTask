@@ -10,7 +10,7 @@ namespace TestTask.Models
         public string Model { get; set; }
         public string ClassCar { get; set; }
         public DateTime DateManufacture { get; set; }
-        public int NumberRegistration { get; set; }
+        public string NumberRegistration { get; set; }
         public List<Order> Order { get; set; }
     }
 }
