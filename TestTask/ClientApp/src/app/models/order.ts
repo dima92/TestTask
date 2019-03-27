@@ -6,6 +6,7 @@
         public description?: string,
         public startDate?: Date,
         public endDate?: Date,
-        public carId?: number
+        public CarId?: number,
+        public UserId?: number
         ) { }
 }

@@ -28,17 +28,6 @@ export class UserComponent implements OnInit {
                 }
             });
 
-
-        //this.userService.createUser(this.user).subscribe((data: User) => {
-        //    this.users.push(data);
-        //});
-
-
-
-        this.userService.updateUser(this.user).subscribe(data => this.user);
-
-        this.userService.deleteUser(this.user.id).subscribe(data => this.user);
-
     }
 }
 

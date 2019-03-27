@@ -25,7 +25,7 @@ namespace TestTask.Controllers
         {
             try
             {
-                var result = _db.Orders.ToList();
+                var result = _db.Users.ToList();
                 return Ok(result);
             }
             catch (Exception ex)

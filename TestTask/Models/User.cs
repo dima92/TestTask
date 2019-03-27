@@ -9,7 +9,7 @@ namespace TestTask.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public DateTime DateBirthday { get; set; }
-        public int NumberLicense { get; set; }
+        public string NumberLicense { get; set; }
         public List<Order> Order { get; set; }
     }
 }
