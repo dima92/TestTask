@@ -25,18 +25,18 @@ namespace TestTask.Controllers
 
 
         [HttpGet]
-        public IActionResult Get(string stat)
+        public IActionResult Get(string avto , string startDate)
         {
             try
             {
                 List<OrderDto> result = new List<OrderDto>();
-                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).
-                    OrderBy(u => u.User.Name).
-                    ThenBy(u => u.Car.Mark).
-                    ThenBy(u => u.Car.Model).
-                    ThenBy(u => u.StartDate).
-                    ThenBy(u => u.EndDate).
-                    Where(r => r.User.Name.StartsWith(stat.Substring(0, 4))).ToList();
+                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                    //OrderBy(u => u.User.Name).
+                    //ThenBy(u => u.Car.Mark).
+                    //ThenBy(u => u.Car.Model).
+                    //ThenBy(u => u.StartDate).
+                    //ThenBy(u => u.EndDate).
+                    //Where(r => r.User.Name.StartsWith(stat.Substring(0, 4))).ToList();
 
                 foreach (var order in allOrders)
                 {
@@ -53,6 +53,18 @@ namespace TestTask.Controllers
                     });
                 }
 
+                if (startDate != null)
+                {
+                    DateTime stDate = Convert.ToDateTime(startDate);
+                    result = result.Where(w => w.StartDate.Date == stDate.Date).ToList();
+                }
+
+                if (avto != null)
+                {
+                    result = result.Where(w => w.Car.StartsWith(avto)).ToList();
+                }
+               
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -63,12 +75,12 @@ namespace TestTask.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public Task<Order> Get(int id)
-        {
-            Task<Order> order = _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
-            return order;
-        }
+        //[HttpGet("{id}")]
+        //public Task<Order> Get(int id)
+        //{
+        //    Task<Order> order = _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
+        //    return order;
+        //}
 
 
         [HttpPost]

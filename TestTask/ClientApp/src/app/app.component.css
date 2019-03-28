@@ -27,3 +27,7 @@
 .example-full-width {
     width: 100%;
 }
+
+.input-filters {
+    width: 129px !important;
+}

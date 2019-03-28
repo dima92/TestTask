@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { UserService } from '../services/user.service';
 import { CarService } from '../services/car.service';
@@ -20,12 +20,12 @@ export class OrderComponent implements OnInit {
     status: boolean = true;
     allUsers: User[];
     allCars: Car[];
-    selectCar: Car;
-    selectUser: User;
     orderObj: {} = {
         startDate: new Date(),
-        endDate: new Date()
-    }
+        endDate: new Date(),
+    };
+    filter: {} = {};
+    title: string = "Добавление заказа";
 
     constructor(private orderService: OrderService,
         private userService: UserService,
@@ -55,7 +55,7 @@ export class OrderComponent implements OnInit {
                 }
             });
 
-      
+
 
         //this.orderService.updateOrder(this.order).subscribe(data => this.order);
 
@@ -64,12 +64,17 @@ export class OrderComponent implements OnInit {
     }
 
     add() {
+        this.orderObj = {};
+        this.orderObj = {
+            startDate: new Date(),
+            endDate: new Date(),
+        };
         this.status = false;
     }
 
     getOrders() {
 
-        this.orderService.getOrders().subscribe((data: Order[]) => {
+        this.orderService.getOrders(this.filter).subscribe((data: Order[]) => {
             this.orders = data;
         },
 
@@ -87,6 +92,16 @@ export class OrderComponent implements OnInit {
     }
     cancel() {
         this.status = true;
+    }
+
+    filterForm() {
+        this.getOrders();
+    }
+
+    edit(order) {
+        this.title = "Редактирование заказа";
+        this.orderObj = order;
+        this.status = false;
     }
 }
 

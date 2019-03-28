@@ -12,6 +12,25 @@
                     <td>Пользователь</td>
                     <td>Описание</td>
                 </tr>
+                <tr>
+                    <td>
+                        <mat-form-field style="width: 129px !important;">
+                            <input matInput placeholder="фильтр по авто" [(ngModel)]="filter.avto" [ngModelOptions]="{standalone: true}" (keyup)="filterForm()">
+                        </mat-form-field>
+                    </td>
+                    <td></td>
+                    <td>
+                        <mat-form-field style="width: 129px !important;">
+                            <input matInput [matDatepicker]="picker3" placeholder="Ф-р дата нач."
+                                   [(ngModel)]="filter.startDate" [ngModelOptions]="{standalone: true}" (dateChange)="filterForm()">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let order of orders">
@@ -32,7 +51,7 @@
 </div>
 <ng-template #unset>
     <div>
-        <h3>Добавление заказа</h3>
+        <h3>{{title}}</h3>
         <div align="center" style="width: 100%">
             <div align="left" style="width: 50%">
                 <form method="get" name="addEditForm">
@@ -56,7 +75,7 @@
                     <div>
                         <mat-form-field>
                             <mat-label>Автомобили</mat-label>
-                            <select matNativeControl required [(ngModel)]="orderObj.CarId" [ngModelOptions]="{standalone: true}">
+                            <select matNativeControl required [(ngModel)]="orderObj.carId" [ngModelOptions]="{standalone: true}">
                                 <option label="-- выберите авто --"></option>
                                 <option *ngFor="let car of allCars" [value]="car.id">{{car.mark}} {{car.model}}</option>
                             </select>
@@ -66,7 +85,7 @@
                     <div>
                         <mat-form-field>
                             <mat-label>Пользователи</mat-label>
-                            <select matNativeControl required [(ngModel)]="orderObj.UserId" [ngModelOptions]="{standalone: true}">
+                            <select matNativeControl required [(ngModel)]="orderObj.userId" [ngModelOptions]="{standalone: true}">
                                 <option label="-- выберите пользователя --"></option>
                                 <option *ngFor="let user of allUsers" [value]="user.id">{{user.name}} {{user.lastName}}</option>
                             </select>

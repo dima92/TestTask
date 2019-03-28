@@ -11,8 +11,10 @@ export class OrderService {
     constructor(private http: HttpClient) {
     }
 
-    getOrders() {
-        return this.http.get(this.url);
+    getOrders(filter: any) {
+        let param = this.url + "?avto=" + (filter.avto == undefined ? '' : filter.avto)  + "&startDate="
+            + (filter.startDate == undefined ? '' : filter.startDate.toLocaleDateString());
+        return this.http.get(param);
     }
 
     createOrder(order: Order) {
