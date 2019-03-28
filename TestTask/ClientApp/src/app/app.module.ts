@@ -14,7 +14,7 @@ import { UserService } from './services/user.service';
 import { CarService } from './services/car.service';
 import { OrderService } from './services/order.service';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import {
     MatAutocompleteModule,

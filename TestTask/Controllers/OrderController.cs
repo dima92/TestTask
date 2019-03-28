@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using TestTask.Models;
 using TestTask.ModelsDto;
@@ -23,12 +25,19 @@ namespace TestTask.Controllers
 
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string stat)
         {
             try
             {
                 List<OrderDto> result = new List<OrderDto>();
-                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).
+                    OrderBy(u => u.User.Name).
+                    ThenBy(u => u.Car.Mark).
+                    ThenBy(u => u.Car.Model).
+                    ThenBy(u => u.StartDate).
+                    ThenBy(u => u.EndDate).
+                    Where(r => r.User.Name.StartsWith(stat.Substring(0, 4))).ToList();
+
                 foreach (var order in allOrders)
                 {
                     result.Add(new OrderDto

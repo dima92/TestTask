@@ -85,6 +85,9 @@ export class OrderComponent implements OnInit {
             this.status = true;
         });
     }
+    cancel() {
+        this.status = true;
+    }
 }
 
 
