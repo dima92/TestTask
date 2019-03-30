@@ -20,13 +20,9 @@ export class OrderComponent implements OnInit {
     status: boolean = true;
     allUsers: User[];
     allCars: Car[];
-    orderObj: {} = {
-        startDate: new Date(),
-        endDate: new Date(),
-    };
+    orderObj: {} = {};
     filter: {} = {};
-    title: string = "Добавление заказа";
-    changebtn: string = "Добавить";
+    isNew: boolean = true;
 
     constructor(private orderService: OrderService,
         private userService: UserService,
@@ -88,6 +84,7 @@ export class OrderComponent implements OnInit {
     }
     cancel() {
         this.status = true;
+        this.isNew = true;
     }
 
     filterForm() {
@@ -96,20 +93,24 @@ export class OrderComponent implements OnInit {
 
     edit(order) {
         this.status = false;
-        this.title = "Редактирование заказа";
-        this.changebtn = "Сохранить";
+        this.isNew = false;
         this.orderObj = order;
-        this.orderService.updateOrder(order).subscribe(data => this.getOrders());
 
-        error => {
-            for (var i = 0; i < error.error.error.length; i++) {
-                alert(error.error.error[i]);
-            }
-        };
     }
+
     save(order) {
-        this.orderService.updateOrder(order).subscribe(data => this.getOrders());
+        debugger;
+        this.orderService.updateOrder(order).subscribe((data) => {
+            this.getOrders();
+            this.status = true;
+        },
+            error => {
+                for (var i = 0; i < error.error.error.length; i++) {
+                    alert(error.error.error[i]);
+                }
+            });
     }
+
     delete(id) {
         this.orderService.deleteOrder(id).subscribe(data => this.getOrders());
 

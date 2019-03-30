@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using TestTask.Models;
 using TestTask.ModelsDto;
 
@@ -15,11 +12,11 @@ namespace TestTask.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        public ApplicationContext _db;
+        public ApplicationContext Db;
 
         public OrderController(ApplicationContext context)
         {
-            _db = context;
+            Db = context;
         }
 
 
@@ -30,7 +27,7 @@ namespace TestTask.Controllers
             try
             {
                 List<OrderDto> result = new List<OrderDto>();
-                List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
+                List<Order> allOrders = Db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
                 foreach (var order in allOrders)
                 {
                     result.Add(new OrderDto
@@ -69,6 +66,7 @@ namespace TestTask.Controllers
                     result = result.Where(w => w.User.StartsWith(user)).ToList();
                 }
 
+                result = result.OrderByDescending(x => x.StartDate).ToList();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -78,49 +76,56 @@ namespace TestTask.Controllers
             }
         }
 
-
-        //[HttpGet("{id}")]
-        //public Task<Order> Get(int id)
-        //{
-        //    Task<Order> order = _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
-        //    return order;
-        //}
-
-
+        /// <summary>
+        /// Add new order
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody] Order order)
+        public IActionResult Add([FromBody] Order order)
         {
             if (ModelState.IsValid)
             {
-                _db.Orders.Add(order);
-                _db.SaveChanges();
+                Db.Orders.Add(order);
+                Db.SaveChanges();
                 return Ok(order);
             }
             return BadRequest(ModelState);
         }
 
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Order order)
+        /// <summary>
+        /// Edit Order
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public IActionResult Edit([FromBody] OrderDto order)
         {
             if (ModelState.IsValid)
             {
-                _db.Update(order);
-                _db.SaveChanges();
-                return Ok(order);
+                Order ord = new Order();
+                ord.CarId = order.CarId;
+                ord.UserId = order.UserId;
+                ord.Description = order.Description;
+                ord.Rent = order.Rent;
+                ord.StartDate = order.StartDate;
+                ord.EndDate = order.EndDate;
+                ord.Id = order.Id;
+                Db.Orders.Update(ord);
+                Db.SaveChanges();
+                return Ok();
             }
-
             return BadRequest(ModelState);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Order order = _db.Orders.FirstOrDefault(x => x.Id == id);
+            Order order = Db.Orders.FirstOrDefault(x => x.Id == id);
             if (order != null)
             {
-                _db.Orders.Remove(order);
-                _db.SaveChanges();
+                Db.Orders.Remove(order);
+                Db.SaveChanges();
             }
             return Ok(order);
         }

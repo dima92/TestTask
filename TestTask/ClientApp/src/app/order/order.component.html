@@ -53,7 +53,7 @@
                     <td>{{order.description}}</td>
                     <td>
                         <button class="btn btn-sm btn-primary" (click)="edit(order)">Изменить</button>
-                        <button class="btn btn-sm btn-danger" (click)="delete(order.id)">Удалить</button>
+                        <button class="btn btn-sm btn-danger" (click)="delete(order.id)" style="margin-left:20px;">Удалить</button>
                     </td>
                 </tr>
             </tbody>
@@ -62,7 +62,7 @@
 </div>
 <ng-template #unset>
     <div>
-        <h3>{{title}}</h3>
+        <h3>{{isNew ? 'Добавление заказа' : 'Редактирование заказа'}}</h3>
         <div align="center" style="width: 100%">
             <div align="left" style="width: 50%">
                 <form method="get" name="addEditForm">
@@ -108,8 +108,17 @@
                             <textarea matInput placeholder="Примечание" [(ngModel)]="orderObj.description" [ngModelOptions]="{standalone: true}"></textarea>
                         </mat-form-field>
                     </div>
-                    <button mat-button mat-raised-button color="primary" (click)="addNewOrder(orderObj)">{{changebtn}}</button>
-                    <button mat-button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
+                    <div *ngIf="isNew;else unset">
+                        <button mat-button mat-raised-button color="primary" (click)="addNewOrder(orderObj)">Добавить</button>
+                        <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                    </div>
+                    <ng-template #unset>
+                        <div>
+                            <button mat-button mat-raised-button color="primary" (click)="save(orderObj)">Сохранить</button>
+                            <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                        </div>
+                    </ng-template>
+
                 </form>
             </div>
         </div>

@@ -24,7 +24,7 @@ export class OrderService {
     }
     updateOrder(order: Order) {
 
-        return this.http.put(this.url + '/' + order.id, order);
+        return this.http.put(this.url, order);
     }
     deleteOrder(id: number) {
         return this.http.delete(this.url + '/' + id);
