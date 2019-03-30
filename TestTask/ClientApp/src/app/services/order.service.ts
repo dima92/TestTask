@@ -12,8 +12,10 @@ export class OrderService {
     }
 
     getOrders(filter: any) {
-        let param = this.url + "?avto=" + (filter.avto == undefined ? '' : filter.avto)  + "&startDate="
-            + (filter.startDate == undefined ? '' : filter.startDate.toLocaleDateString());
+        let param = this.url + "?avto=" + (filter.avto == undefined ? '' : filter.avto) + "&startDate="
+            + (filter.startDate == undefined ? '' : filter.startDate.toLocaleDateString()) + "&endDate="
+            + (filter.endDate == undefined ? '' : filter.endDate.toLocaleDateString()) + "&user="
+            + (filter.user == undefined ? '' : filter.user);
         return this.http.get(param);
     }
 

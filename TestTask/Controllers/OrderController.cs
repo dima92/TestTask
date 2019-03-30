@@ -25,23 +25,17 @@ namespace TestTask.Controllers
 
 
         [HttpGet]
-        public IActionResult Get(string avto , string startDate)
+        public IActionResult Get(string avto, string startDate, string endDate, string user)
         {
             try
             {
                 List<OrderDto> result = new List<OrderDto>();
                 List<Order> allOrders = _db.Orders.Include(tab => tab.Car).Include(us => us.User).ToList();
-                    //OrderBy(u => u.User.Name).
-                    //ThenBy(u => u.Car.Mark).
-                    //ThenBy(u => u.Car.Model).
-                    //ThenBy(u => u.StartDate).
-                    //ThenBy(u => u.EndDate).
-                    //Where(r => r.User.Name.StartsWith(stat.Substring(0, 4))).ToList();
-
                 foreach (var order in allOrders)
                 {
                     result.Add(new OrderDto
                     {
+                        Id = order.Id,
                         Car = $"{order.Car.Mark} {order.Car.Model}",
                         CarId = order.CarId,
                         User = $"{order.User.Name} {order.User.LastName}",
@@ -63,7 +57,17 @@ namespace TestTask.Controllers
                 {
                     result = result.Where(w => w.Car.StartsWith(avto)).ToList();
                 }
-               
+
+                if (endDate != null)
+                {
+                    DateTime enDate = Convert.ToDateTime(endDate);
+                    result = result.Where(w => w.EndDate.Date == enDate.Date).ToList();
+                }
+
+                if (user != null)
+                {
+                    result = result.Where(w => w.User.StartsWith(user)).ToList();
+                }
 
                 return Ok(result);
             }

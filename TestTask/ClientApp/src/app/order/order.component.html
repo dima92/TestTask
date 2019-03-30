@@ -14,21 +14,32 @@
                 </tr>
                 <tr>
                     <td>
-                        <mat-form-field style="width: 129px !important;">
+                        <mat-form-field style="width: 120px !important;">
                             <input matInput placeholder="фильтр по авто" [(ngModel)]="filter.avto" [ngModelOptions]="{standalone: true}" (keyup)="filterForm()">
                         </mat-form-field>
                     </td>
                     <td></td>
                     <td>
-                        <mat-form-field style="width: 129px !important;">
+                        <mat-form-field style="width: 120px !important;">
                             <input matInput [matDatepicker]="picker3" placeholder="Ф-р дата нач."
                                    [(ngModel)]="filter.startDate" [ngModelOptions]="{standalone: true}" (dateChange)="filterForm()">
                             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker>
                         </mat-form-field>
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <mat-form-field style="width: 130px !important;">
+                            <input matInput [matDatepicker]="picker4" placeholder="Ф-р дата окон."
+                                   [(ngModel)]="filter.endDate" [ngModelOptions]="{standalone: true}" (dateChange)="filterForm()">
+                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field style="width: 120px !important;">
+                            <input matInput placeholder="фильтр по польз." [(ngModel)]="filter.user" [ngModelOptions]="{standalone: true}" (keyup)="filterForm()">
+                        </mat-form-field>
+                    </td>
                     <td></td>
                 </tr>
             </thead>
@@ -42,7 +53,7 @@
                     <td>{{order.description}}</td>
                     <td>
                         <button class="btn btn-sm btn-primary" (click)="edit(order)">Изменить</button>
-                        <button class="btn btn-sm btn-danger" (click)="delete(order)">Удалить</button>
+                        <button class="btn btn-sm btn-danger" (click)="delete(order.id)">Удалить</button>
                     </td>
                 </tr>
             </tbody>
@@ -97,7 +108,7 @@
                             <textarea matInput placeholder="Примечание" [(ngModel)]="orderObj.description" [ngModelOptions]="{standalone: true}"></textarea>
                         </mat-form-field>
                     </div>
-                    <button mat-button mat-raised-button color="primary" (click)="addNewOrder(orderObj)">Добавить</button>
+                    <button mat-button mat-raised-button color="primary" (click)="addNewOrder(orderObj)">{{changebtn}}</button>
                     <button mat-button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
                 </form>
             </div>

@@ -26,6 +26,7 @@ export class OrderComponent implements OnInit {
     };
     filter: {} = {};
     title: string = "Добавление заказа";
+    changebtn: string = "Добавить";
 
     constructor(private orderService: OrderService,
         private userService: UserService,
@@ -54,13 +55,6 @@ export class OrderComponent implements OnInit {
                     alert(error.error.error[i]);
                 }
             });
-
-
-
-        //this.orderService.updateOrder(this.order).subscribe(data => this.order);
-
-        //this.orderService.deleteOrder(this.order.id).subscribe(data => this.order);
-
     }
 
     add() {
@@ -84,6 +78,8 @@ export class OrderComponent implements OnInit {
                 }
             });
     }
+
+
     addNewOrder(orderData) {
         this.orderService.createOrder(orderData).subscribe((data: Order) => {
             this.getOrders();
@@ -99,9 +95,29 @@ export class OrderComponent implements OnInit {
     }
 
     edit(order) {
-        this.title = "Редактирование заказа";
-        this.orderObj = order;
         this.status = false;
+        this.title = "Редактирование заказа";
+        this.changebtn = "Сохранить";
+        this.orderObj = order;
+        this.orderService.updateOrder(order).subscribe(data => this.getOrders());
+
+        error => {
+            for (var i = 0; i < error.error.error.length; i++) {
+                alert(error.error.error[i]);
+            }
+        };
+    }
+    save(order) {
+        this.orderService.updateOrder(order).subscribe(data => this.getOrders());
+    }
+    delete(id) {
+        this.orderService.deleteOrder(id).subscribe(data => this.getOrders());
+
+        error => {
+            for (var i = 0; i < error.error.error.length; i++) {
+                alert(error.error.error[i]);
+            }
+        };
     }
 }
 
